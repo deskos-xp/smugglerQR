@@ -71,6 +71,13 @@ class reader:
             del(i)
         
         nums=[i for i in nums if os.path.exists(i)]
+        if nums == []:
+            moddy=0
+            for i in os.listdir(directory):
+                print(i)
+                moddy=(len(i.split('.')[-1])-len(str(int(i.split('.')[-1]))))-1
+                
+            exit('you might need to adjust your mod number to "{}"'.format(moddy))
         return nums,start,end
 
     def readChunk(self,fname):
