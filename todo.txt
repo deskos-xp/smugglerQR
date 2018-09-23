@@ -1,0 +1,6 @@
+create function to perform data file split like create-chunks.sh
+create util to capture data and log it to logfile
+create a util to use claptrap utility to encrypt each chunk separately
+	each qrcode will be paired with a keyfile for its position 
+		or
+	each qrcode will be a chunk of the pre-encrypted data file
