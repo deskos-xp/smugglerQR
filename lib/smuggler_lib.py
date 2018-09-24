@@ -191,5 +191,5 @@ if __name__ == "__main__":
     #resultJson = the logfile
     #ofname = the final assembled datafile stored in resultdir
     # useLog option is in the event that manual assembly of the data log is done
-    f.readData(mod=7,useLog=False)
+    f.readData(mod=7,useLog=False,ofname='smuggler.tar.xz',tmpdir='./qrcodes',resultDir='./result',resultJson='result.json')
     
