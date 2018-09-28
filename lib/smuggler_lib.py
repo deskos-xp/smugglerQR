@@ -8,7 +8,7 @@ class app_qr_handler:
     def __init__(self):
         self.defaultQRName='{}-QRCODE.png'.format(time.strftime('%H:%M:%S_%d.%m.%y',time.localtime()))
         
-    def createQrCode(self,data,fname=None,scale=6,version=None,error='H',mode=None,encoding=None,tmpdir=None):
+    def createQrCode(self,data,fname=None,scale=6,version=35,error='H',mode=None,encoding=None,tmpdir=None):
         path=None
         qr=pyqrcode.create(data,version=version,error=error,mode=mode,encoding=encoding)
         if fname == None:
@@ -109,7 +109,7 @@ class reader:
             a.createQrCode(form,tmpdir=tmpdir,scale=scale)
             print(form)
         
-    def readData(self,tmpdir='./qrcodes',resultdir='./result',resultJson='./result.json',mod=8,useLog=False,ofname='./final.asmb'):
+    def readData(self,tmpdir='./qrcodes',resultdir='./result',resultJson='./result.json',useLog=False,ofname='./final.asmb'):
         if useLog == False:
             if not os.path.exists(resultdir):
                 try:
@@ -138,14 +138,19 @@ class reader:
         nchunk['end']=chunk[3]
         return nchunk
 
-    def storeData(self,chunk):
+    def storeData(self,chunk,returnChunk=False):
         #data logging
-        self.dataStore['{}_{}'.format(chunk['id'],chunk['pos'])]={
+        key='{}_{}'.format(chunk['id'],chunk['pos'])
+        self.dataStore[key]={
                 'id':chunk['id'],
                 'pos':chunk['pos'],
                 'end':chunk['end'],
                 'dat':chunk['dat'],
         }
+        if returnChunk == True:
+            return key,self.dataStore
+            self.dataStore={}
+
 
     def ordered_access(self,accept):
         orders=[]
@@ -181,7 +186,7 @@ if __name__ == "__main__":
     #tmpdir = where the codes will be stored
     #arg1 datachunks prefix
     #chunkDir = where the data chunks to be converted to qrcodes will are stored
-    f.mkcodes('smuggler.tar.xz',tmpdir='./qrcodes',mod=7,scale=2,chunkDir='./data')
+    #f.mkcodes('smuggler.tar.xz',tmpdir='./qrcodes',mod=7,scale=2,chunkDir='./data')
     
     ###f.readData() doc########
     #useLog = false will build a dataLog from the data stored in qrcode images in tmpdir
@@ -191,5 +196,5 @@ if __name__ == "__main__":
     #resultJson = the logfile
     #ofname = the final assembled datafile stored in resultdir
     # useLog option is in the event that manual assembly of the data log is done
-    f.readData(mod=7,useLog=False,ofname='smuggler.tar.xz',tmpdir='./qrcodes',resultDir='./result',resultJson='result.json')
+    f.readData(useLog=False,ofname='smuggler.tar.xz',tmpdir='./qrcodes',resultdir='./result',resultJson='result.json')
     
