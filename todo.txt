@@ -5,5 +5,8 @@ create a util to use claptrap utility to encrypt each chunk separately
 	each qrcode will be a chunk of the pre-encrypted data file
 
 [next] create a function to use a webcam to scan qrcode and store in logfile
-
+	--only capture when a qrcode is correctly read
+	--two modes
+		--save capture and process from captured images
+		--capture data directly from camera
 create a tool to take the generated qrcodes and place them in a  grid on a pdf with reportlab
