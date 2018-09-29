@@ -1,0 +1,11 @@
+r'],i) for i in os.listdir(args['qr_dir']) if os.path.splitext(i)[1] == '.png'])
+        files.append(os.path.join(args['result_dir'],'END.png'))
+        caps=True
+        for i in [os.path.join(args['result_dir'],'START.png'),os.path.join(args['result_dir'],'END.png')]:
+            if not os.path.exists(i):
+                caps=False
+        if not caps:
+            cap=mkStartEnd.mkEnds()
+            cap.mkCaps(resultdir=args['result_dir'])
+        checked=[i for i in files if os.path.exists(i)] 
+        

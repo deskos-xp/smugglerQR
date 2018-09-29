@@ -1,0 +1,8 @@
+ parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'qrcode-dir':
+                    if key == 'mkcodes':
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                    if key == 'assemble':
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'])
+                    if key in ['mkgif']:
+                        parsers[key].add_argument(op

@@ -1,0 +1,8 @@
+        if skey == 'logfile':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'uselog-assemble':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],action=op['action'])
+                if skey == 'duration':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
+            if key == 'mkcodes':
+                parsers[key].set_default

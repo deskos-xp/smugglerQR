@@ -1,0 +1,4 @@
+imageio
+PIL
+pyqrcode
+pyzbar

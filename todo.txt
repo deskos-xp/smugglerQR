@@ -7,5 +7,3 @@ create a util to use claptrap utility to encrypt each chunk separately
 [next] create a function to use a webcam to scan qrcode and store in logfile
 
 create a tool to take the generated qrcodes and place them in a  grid on a pdf with reportlab
-
-add function to convert pngs into gif with start and end indicative qrcodes

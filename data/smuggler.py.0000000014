@@ -1,0 +1,8 @@
+['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'scale':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
+                if skey == 'ofname':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'result-dir':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+        

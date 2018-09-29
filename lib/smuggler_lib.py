@@ -6,8 +6,11 @@ import json,shutil
 
 class app_qr_handler:
     def __init__(self):
-        self.defaultQRName='{}-QRCODE.png'.format(time.strftime('%H:%M:%S_%d.%m.%y',time.localtime()))
-        
+        self.defaultQRName=self.mkdefaultName()
+
+    def mkdefaultName(self):
+        return '{}-QRCODE.png'.format(time.strftime('%H:%M:%S_%d.%m.%y',time.localtime()))
+
     def createQrCode(self,data,fname=None,scale=6,version=35,error='H',mode=None,encoding=None,tmpdir=None):
         path=None
         qr=pyqrcode.create(data,version=version,error=error,mode=mode,encoding=encoding)

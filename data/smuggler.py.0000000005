@@ -1,0 +1,14 @@
+self):
+        pass
+
+    def args2dict(self,args):
+        return {i:getattr(args,i) for i in dir(args) if not callable(getattr(args,i)) and not i.startswith('__')}
+ 
+    def mkcodes(self,args):
+        args=self.args2dict(args)
+        if type(args['mod']) == type(str()):
+            args['mod']=int(args['mod'])
+        if type(args['scale_of_code']) == type(str()):
+            args['scale_of_code']=int(args['scale_of_code'])
+        if type(args['bytes']) == type(str()):
+            args['bytes']=int(args

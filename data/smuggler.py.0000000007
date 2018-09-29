@@ -1,0 +1,19 @@
+          )
+
+        f=smuggler_lib.reader()
+        
+        f.mkcodes(
+                args['fname'],
+                tmpdir=args['qr_dir'],
+                mod=args['mod'],
+                scale=args['scale_of_code'],
+                chunkDir=args['chunk_dir']
+                )
+        
+        print(args)
+
+    def mkgif(self,args):
+        gif=mkgif.mkgif()
+        args=self.returnArgsAsDict(args)
+        files=[os.path.join(args['result_dir'],'START.png')]
+        files.extend([os.path.join(args['qr_di

@@ -5,3 +5,5 @@ lib/handle_one.py -- get data from one qrcode and create/append to logfile
 sh/create-chunks.sh -- take data file and make chunked data for smuggler.py [deprecated,smuggler.py now includes this functionality]
 sh/mkgif.sh -- take qrcodes and convert to a animated qr gif
 lib/mkStartEnd.py -- makes indicative START and END images for mkgif.sh
+lib/mkgif.py -- make a gif from files provided by smuggler.py
+smuggler.py -- cmdline utility that controls operations

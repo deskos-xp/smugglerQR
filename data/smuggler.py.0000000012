@@ -1,0 +1,9 @@
+self.args[key][skey] 
+                if skey == 'bytes':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
+                if skey == 'mod':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
+                if skey == 'fname':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'chunkDir':
+                   

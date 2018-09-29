@@ -3,7 +3,7 @@
 import os,sys
 sys.path.insert(0,'./lib')
 import argparse
-import chunkless,smuggler_lib,handle_one
+import chunkless,smuggler_lib,handle_one,mkStartEnd,mkgif
 
 class util:
     args={
@@ -23,10 +23,16 @@ class util:
                 'uselog-assemble':{'short':'-l','long':'--assemble-from-log','help':'assemble file using log file','action':'store_true'}
                 },
             'getone':{
-                'qr_name':{'short':'-f','long':'--fname','help':'qrcode input fname','required':'yes'},
+                'fname':{'short':'-f','long':'--fname','help':'qrcode input fname','required':'yes'},
                 'result-dir':{'short':'-r','long':'--result-dir','help':'where resulting log will be appended/created','required':'yes'},
                 'logfile':{'short':'-j','long':'--json-logfile','help':'log data to from qrcode','required':'yes'},
-                }
+                },
+            'mkgif':{
+                'fname':{'short':'-f','long':'--fname','help':'output gif name','required':'yes'},
+                'qrcode-dir':{'short':'-q','long':'--qr-dir','help':'input qrcodes','required':'yes'},
+                'result-dir':{'short':'-r','long':'--result-dir','help':'where the resulting gif will be stored','required':'yes'},
+                'duration':{'short':'-d','long':'--duration','help':'how long between each frame (seconds)','default':'5'},
+                },
             }
     def __init__(self):
         pass
@@ -70,9 +76,34 @@ class util:
         
         print(args)
 
+    def mkgif(self,args):
+        gif=mkgif.mkgif()
+        args=self.returnArgsAsDict(args)
+        files=[os.path.join(args['result_dir'],'START.png')]
+        files.extend([os.path.join(args['qr_dir'],i) for i in os.listdir(args['qr_dir']) if os.path.splitext(i)[1] == '.png'])
+        files.append(os.path.join(args['result_dir'],'END.png'))
+        caps=True
+        for i in [os.path.join(args['result_dir'],'START.png'),os.path.join(args['result_dir'],'END.png')]:
+            if not os.path.exists(i):
+                caps=False
+        if not caps:
+            cap=mkStartEnd.mkEnds()
+            cap.mkCaps(resultdir=args['result_dir'])
+        checked=[i for i in files if os.path.exists(i)] 
+        del(files)
+        gif.mkgif(fnames=checked,fname=os.path.join(args['result_dir'],args['fname']),duration=int(args['duration']))
+        for i in [os.path.join(args['result_dir'],'START.png'),os.path.join(args['result_dir'],'END.png')]:
+            os.remove(i)
+        print(args)
+
+    def returnArgsAsDict(self,args):
+        return {i:getattr(args,i) for i in dir(args) if not callable(getattr(args,i)) and not i.startswith('__')}
+
+
     def getone(self,args):
         decoder=handle_one.doOne()
         decoder.store_to_log(args.fname,logfile=args.json_logfile,resultdir=args.result_dir)
+        args=self.returnArgsAsDict(args)
         print(args)
 
     def assemble(self,args):
@@ -112,6 +143,8 @@ class util:
                         parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
                     if key == 'assemble':
                         parsers[key].add_argument(op['short'],op['long'],help=op['help'])
+                    if key in ['mkgif']:
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
                 if skey == 'scale':
                     parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
                 if skey == 'ofname':
@@ -122,14 +155,16 @@ class util:
                     parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
                 if skey == 'uselog-assemble':
                     parsers[key].add_argument(op['short'],op['long'],help=op['help'],action=op['action'])
-                if skey == 'qr_name':
-                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'duration':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
             if key == 'mkcodes':
                 parsers[key].set_defaults(func=self.mkcodes)
             elif key == 'assemble':
                 parsers[key].set_defaults(func=self.assemble)
             elif key == 'getone':
                 parsers[key].set_defaults(func=self.getone)
+            elif key == 'mkgif':
+                parsers[key].set_defaults(func=self.mkgif)
         try:
             options=parser.parse_args()
             options.func(options)

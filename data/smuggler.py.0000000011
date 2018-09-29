@@ -1,0 +1,16 @@
+ssemble_from_log'],
+                ofname=args['fname'],
+                tmpdir=args['qr_dir'],
+                resultdir=args['result_dir'],
+                resultJson=args['json_logfile']
+            )
+        print(args)
+
+    def cmdline(self):
+        parser=argparse.ArgumentParser()
+        subParsers=parser.add_subparsers()
+        parsers={}
+        for key in self.args.keys():
+            parsers[key]=subParsers.add_parser(name=key)
+            for skey in self.args[key].keys():
+                op=
