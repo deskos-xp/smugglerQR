@@ -1,16 +1,10 @@
-ssemble_from_log'],
-                ofname=args['fname'],
-                tmpdir=args['qr_dir'],
-                resultdir=args['result_dir'],
-                resultJson=args['json_logfile']
-            )
+s['result_dir'])
+        checked=[i for i in files if os.path.exists(i)] 
+        del(files)
+        gif.mkgif(fnames=checked,fname=os.path.join(args['result_dir'],args['fname']),duration=int(args['duration']))
+        for i in [os.path.join(args['result_dir'],'START.png'),os.path.join(args['result_dir'],'END.png')]:
+            os.remove(i)
         print(args)
 
-    def cmdline(self):
-        parser=argparse.ArgumentParser()
-        subParsers=parser.add_subparsers()
-        parsers={}
-        for key in self.args.keys():
-            parsers[key]=subParsers.add_parser(name=key)
-            for skey in self.args[key].keys():
-                op=
+    def returnArgsAsDict(self,args):
+        return {i:getattr(args,i) for i in dir(args) if not callable(getattr(args,i)) and not i.startswith('__

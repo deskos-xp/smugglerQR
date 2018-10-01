@@ -1,7 +1,7 @@
-t':'-f','long':'--fname','help':'input filename','required':'yes'},
+  'fname':{'short':'-f','long':'--fname','help':'input filename','required':'yes'},
                 'chunkDir':{'short':'-d','long':'--chunk-dir','help':'where the data chunks are stored','required':'yes'},
                 'qrcode-dir':{'short':'-q','long':'--qr-dir','help':'where qrcodes will be stored/placed','required':'yes'},
                 'scale':{'short':'-s','long':'--scale-of-code','help':'size of qrcode png image','default':3},
                 },
             'assemble':{
-                'ofname':{'short':'-f','l
+                'ofname':

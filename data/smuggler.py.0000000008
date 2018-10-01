@@ -1,11 +1,16 @@
-r'],i) for i in os.listdir(args['qr_dir']) if os.path.splitext(i)[1] == '.png'])
-        files.append(os.path.join(args['result_dir'],'END.png'))
-        caps=True
-        for i in [os.path.join(args['result_dir'],'START.png'),os.path.join(args['result_dir'],'END.png')]:
-            if not os.path.exists(i):
-                caps=False
-        if not caps:
-            cap=mkStartEnd.mkEnds()
-            cap.mkCaps(resultdir=args['result_dir'])
-        checked=[i for i in files if os.path.exists(i)] 
-        
+
+        if type(args['bytes']) == type(str()):
+            args['bytes']=int(args['bytes'])
+
+        if args['scale_of_code'] < 2:
+            print('scale of code cannot be below 2! setting scale to minimum!')
+            args['scale_of_code']=2
+
+        if args['bytes'] < 256 or args['bytes'] > 512:
+            print('bytes is outside of 256-512 range! setting to minum bytes size!')
+            args['bytes']=256
+
+        diced=chunkless.sliced()
+        diced.dicer(
+                args['fname'],
+       

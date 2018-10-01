@@ -16,10 +16,16 @@ class doOne:
     def mkpath(self,dir,fname):
         return os.path.join(dir,fname)
 
-    def store_to_log(self,QR_fname,logfile='./results.json',resultdir='./results'):
+    def store_to_log(self,QR_fname,logfile='./results.json',resultdir='./results',skipDecode=False,decoded=None):
         #resultdir+logfile -> where data will be stored
-        decoder=smuggler_lib.app_qr_handler()
-        decoded=decoder.decodeOneQrCode(QR_fname)
+        if skipDecode == False:
+            decoder=smuggler_lib.app_qr_handler()
+            decoded=decoder.decodeOneQrCode(QR_fname)
+        elif skipDecode == True:
+            if decoded != None:
+                decoded=decoded
+            else:
+                exit('cannot use None value for decoded input when using skipDecode arg of store_to_log()')
 
         deformatter=smuggler_lib.reader()
         deformatted=deformatter.breakData(decoded)

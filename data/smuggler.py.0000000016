@@ -1,13 +1,9 @@
-s(func=self.mkcodes)
-            elif key == 'assemble':
-                parsers[key].set_defaults(func=self.assemble)
-            elif key == 'getone':
-                parsers[key].set_defaults(func=self.getone)
-            elif key == 'mkgif':
-                parsers[key].set_defaults(func=self.mkgif)
-        try:
-            options=parser.parse_args()
-            options.func(options)
-        except:
-            exception=sys.exc_info()
-            if str(exception[1]) == "'Namespace' object has no attr
+['help'],required=op['required'])
+                if skey == 'chunkDir':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'qrcode-dir':
+                    if key == 'mkcodes':
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                    if key == 'assemble':
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'])
+ 

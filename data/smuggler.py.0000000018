@@ -1,0 +1,7 @@
+ers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'result-dir':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'logfile':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'uselog-assemble':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['hel

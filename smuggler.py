@@ -4,7 +4,7 @@ import os,sys
 sys.path.insert(0,'./lib')
 import argparse
 import chunkless,smuggler_lib,handle_one,mkStartEnd,mkgif
-
+import camcorder
 class util:
     args={
             'mkcodes':{
@@ -32,6 +32,33 @@ class util:
                 'qrcode-dir':{'short':'-q','long':'--qr-dir','help':'input qrcodes','required':'yes'},
                 'result-dir':{'short':'-r','long':'--result-dir','help':'where the resulting gif will be stored','required':'yes'},
                 'duration':{'short':'-d','long':'--duration','help':'how long between each frame (seconds)','default':'5'},
+                },
+            'capture':{
+                    'qrcode-dir':{
+                    'short':'-q',
+                    'long':'--qr-dir',
+                    'help':'where qrcodes captured by camera will be stored',
+                    'default':'.'},
+                'result-dir':{
+                    'short':'-r',
+                    'long':'--result-dir',
+                    'help':'where the resulting log will be stored',
+                    'required':'yes'},
+                'logfile':{
+                    'short':'-j',
+                    'long':'--json-logfile',
+                    'help':'log data to from qrcode',
+                    'required':'yes'},
+                'camera':{
+                    'short':'-c',
+                    'long':'--camera',
+                    'help':'camera number default is 0',
+                    'default':0},
+                'saveFrame':{
+                    'short':'-S',
+                    'long':'--save-frame',
+                    'help':'save qrcode after decoding to qr_dir',
+                    'action':'store_true'},
                 },
             }
     def __init__(self):
@@ -122,6 +149,20 @@ class util:
             )
         print(args)
 
+    def capture(self,args):
+        args=self.returnArgsAsDict(args)
+        args['camera']=int(args['camera'])
+        if (args['save_frame'] == True) and (args['qr_dir'] == None):
+            exit('to use -S, you must specify -q')
+        cam=camcorder.camcorder()
+        cam.record(
+                cam=args['camera'],
+                qr_dir=args['qr_dir'],
+                result_dir=args['result_dir'],
+                logfile=args['json_logfile'],
+                saveFrame=args['save_frame'])
+        print(args)
+
     def cmdline(self):
         parser=argparse.ArgumentParser()
         subParsers=parser.add_subparsers()
@@ -145,6 +186,8 @@ class util:
                         parsers[key].add_argument(op['short'],op['long'],help=op['help'])
                     if key in ['mkgif']:
                         parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                    if key == 'capture':
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
                 if skey == 'scale':
                     parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
                 if skey == 'ofname':
@@ -157,6 +200,10 @@ class util:
                     parsers[key].add_argument(op['short'],op['long'],help=op['help'],action=op['action'])
                 if skey == 'duration':
                     parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
+                if skey == 'saveFrame':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],action=op['action'])
+                if skey == 'camera':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
             if key == 'mkcodes':
                 parsers[key].set_defaults(func=self.mkcodes)
             elif key == 'assemble':
@@ -165,6 +212,8 @@ class util:
                 parsers[key].set_defaults(func=self.getone)
             elif key == 'mkgif':
                 parsers[key].set_defaults(func=self.mkgif)
+            elif key == 'capture':
+                parsers[key].set_defaults(func=self.capture)
         try:
             options=parser.parse_args()
             options.func(options)

@@ -1,16 +1,13 @@
-['bytes'])
-
-        if args['scale_of_code'] < 2:
-            print('scale of code cannot be below 2! setting scale to minimum!')
-            args['scale_of_code']=2
-
-        if args['bytes'] < 256 or args['bytes'] > 512:
-            print('bytes is outside of 256-512 range! setting to minum bytes size!')
-            args['bytes']=256
-
-        diced=chunkless.sliced()
-        diced.dicer(
-                args['fname'],
-                chunkDir=args['chunk_dir'],
-                byteSize=args['bytes']
-      
+                 'long':'--json-logfile',
+                    'help':'log data to from qrcode',
+                    'required':'yes'},
+                'camera':{
+                    'short':'-c',
+                    'long':'--camera',
+                    'help':'camera number default is 0',
+                    'default':0},
+                'saveFrame':{
+                    'short':'-S',
+                    'long':'--save-frame',
+                    'help':'save qrcode after decoding to qr_dir',
+            

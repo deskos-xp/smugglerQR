@@ -1,13 +1,10 @@
-r.store_to_log(args.fname,logfile=args.json_logfile,resultdir=args.result_dir)
-        args=self.returnArgsAsDict(args)
-        print(args)
-
-    def assemble(self,args):
-        args=self.args2dict(args)
-        if args['assemble_from_log'] == False and args['qr_dir'] == None:
-            exit('at least one of -l or -q must be specified')
-        f=smuggler_lib.reader()
-        #if type(args['mod']) == type(str()):
-        #    args['mod']=int(args['mod'])
-        f.readData( 
-                useLog=args['a
+in(args['result_dir'],'START.png')]
+        files.extend([os.path.join(args['qr_dir'],i) for i in os.listdir(args['qr_dir']) if os.path.splitext(i)[1] == '.png'])
+        files.append(os.path.join(args['result_dir'],'END.png'))
+        caps=True
+        for i in [os.path.join(args['result_dir'],'START.png'),os.path.join(args['result_dir'],'END.png')]:
+            if not os.path.exists(i):
+                caps=False
+        if not caps:
+            cap=mkStartEnd.mkEnds()
+            cap.mkCaps(resultdir=arg

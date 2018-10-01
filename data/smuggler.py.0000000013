@@ -1,8 +1,15 @@
- parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
-                if skey == 'qrcode-dir':
-                    if key == 'mkcodes':
-                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
-                    if key == 'assemble':
-                        parsers[key].add_argument(op['short'],op['long'],help=op['help'])
-                    if key in ['mkgif']:
-                        parsers[key].add_argument(op
+  args['mod']=int(args['mod'])
+        f.readData( 
+                useLog=args['assemble_from_log'],
+                ofname=args['fname'],
+                tmpdir=args['qr_dir'],
+                resultdir=args['result_dir'],
+                resultJson=args['json_logfile']
+            )
+        print(args)
+
+    def capture(self,args):
+        args=self.returnArgsAsDict(args)
+        args['camera']=int(args['camera'])
+        if (args['save_frame'] == True) and (args['qr_dir'] == None):
+            exit('to u

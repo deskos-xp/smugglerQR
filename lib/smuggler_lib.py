@@ -2,14 +2,13 @@
 import pyqrcode,pyzbar.pyzbar as zbar
 from PIL import Image
 import os,sys,time,base64,gzip,binascii
-import json,shutil
-
+import json,shutil,os
 class app_qr_handler:
     def __init__(self):
         self.defaultQRName=self.mkdefaultName()
 
     def mkdefaultName(self):
-        return '{}-QRCODE.png'.format(time.strftime('%H:%M:%S_%d.%m.%y',time.localtime()))
+        return '{}-SN:{}-QRCODE.png'.format(time.strftime('%H:%M:%S_%d.%m.%y',time.localtime()),binascii.hexlify(os.urandom(8)).decode())
 
     def createQrCode(self,data,fname=None,scale=6,version=35,error='H',mode=None,encoding=None,tmpdir=None):
         path=None

@@ -1,0 +1,9 @@
+p'],action=op['action'])
+                if skey == 'duration':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
+                if skey == 'saveFrame':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],action=op['action'])
+                if skey == 'camera':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
+            if key == 'mkcodes':
+                

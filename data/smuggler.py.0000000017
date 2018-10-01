@@ -1,13 +1,8 @@
-ibute 'func'":
-                e='No cmd was given!'
-            else:
-                e=str(exception[1])
-            print('\033[1;31;40m{}\033[1;40;m'.format(e))
-            options=parser.parse_args('--help'.split())
-
-
-
-
-if __name__ == '__main__':
-    a=util()
-    a.cmdline()
+                   if key in ['mkgif']:
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                    if key == 'capture':
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
+                if skey == 'scale':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
+                if skey == 'ofname':
+                    pars

@@ -1,13 +1,20 @@
-del(files)
-        gif.mkgif(fnames=checked,fname=os.path.join(args['result_dir'],args['fname']),duration=int(args['duration']))
-        for i in [os.path.join(args['result_dir'],'START.png'),os.path.join(args['result_dir'],'END.png')]:
-            os.remove(i)
+         chunkDir=args['chunk_dir'],
+                byteSize=args['bytes']
+                )
+
+        f=smuggler_lib.reader()
+        
+        f.mkcodes(
+                args['fname'],
+                tmpdir=args['qr_dir'],
+                mod=args['mod'],
+                scale=args['scale_of_code'],
+                chunkDir=args['chunk_dir']
+                )
+        
         print(args)
 
-    def returnArgsAsDict(self,args):
-        return {i:getattr(args,i) for i in dir(args) if not callable(getattr(args,i)) and not i.startswith('__')}
-
-
-    def getone(self,args):
-        decoder=handle_one.doOne()
-        decode
+    def mkgif(self,args):
+        gif=mkgif.mkgif()
+        args=self.returnArgsAsDict(args)
+        files=[os.path.jo
