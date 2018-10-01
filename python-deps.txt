@@ -2,3 +2,4 @@ imageio
 PIL
 pyqrcode
 pyzbar
+cv2
