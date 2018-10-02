@@ -4,4 +4,4 @@ create a util to use claptrap utility to encrypt each chunk separately
 		or
 	each qrcode will be a chunk of the pre-encrypted data file
 
-create a tool to take the generated qrcodes and place them in a  grid on a pdf with reportlab
+create a tool to take a scanned page with qrcodes and cut it into smaller chunks using a red lined grid for scanning

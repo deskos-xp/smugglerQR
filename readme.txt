@@ -8,3 +8,4 @@ lib/mkStartEnd.py -- makes indicative START and END images for mkgif.sh
 lib/mkgif.py -- make a gif from files provided by smuggler.py
 smuggler.py -- cmdline utility that controls operations
 lib/camcorder.py -- capture barcodes from webcam
+lib/docgen.py -- create pdf with qrcodes 

@@ -4,7 +4,7 @@ import os,sys
 sys.path.insert(0,'./lib')
 import argparse
 import chunkless,smuggler_lib,handle_one,mkStartEnd,mkgif
-import camcorder
+import camcorder,docgen
 class util:
     args={
             'mkcodes':{
@@ -34,7 +34,7 @@ class util:
                 'duration':{'short':'-d','long':'--duration','help':'how long between each frame (seconds)','default':'5'},
                 },
             'capture':{
-                    'qrcode-dir':{
+                'qrcode-dir':{
                     'short':'-q',
                     'long':'--qr-dir',
                     'help':'where qrcodes captured by camera will be stored',
@@ -60,6 +60,23 @@ class util:
                     'help':'save qrcode after decoding to qr_dir',
                     'action':'store_true'},
                 },
+            'docGen':{
+                'qrcode-dir':{
+                    'short':'-q',
+                    'long':'--qr-dir',
+                    'help':'where qrcodes are for document generation',
+                    'required':'yes'},
+                'result-dir':{
+                    'short':'-r',
+                    'long':'--result-dir',
+                    'help':'where the document will be stored',
+                    'required':'yes'},
+                'fname':{
+                    'short':'-f',
+                    'long':'--fname',
+                    'help':'output document name',
+                    'required':'yes'},
+                    }
             }
     def __init__(self):
         pass
@@ -163,6 +180,17 @@ class util:
                 saveFrame=args['save_frame'])
         print(args)
 
+    def docGen(self,args):
+        args=self.returnArgsAsDict(args)
+        if os.path.split(args['fname'])[1] != '.pdf':
+            args['fname']+='.pdf'
+        docName=os.path.join(args['result_dir'],args['fname'])
+        doc=docgen.paged()
+        if not os.path.exists(args['qr_dir']):
+            exit('{} : path does not exist!'.format(args['qr_dir']))
+        doc.tasks(docName,args['qr_dir'])
+        print('document: {}\nfrom: {}'.format(docName,args['qr_dir']))
+
     def cmdline(self):
         parser=argparse.ArgumentParser()
         subParsers=parser.add_subparsers()
@@ -180,7 +208,7 @@ class util:
                 if skey == 'chunkDir':
                     parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
                 if skey == 'qrcode-dir':
-                    if key == 'mkcodes':
+                    if key in ['mkcodes','docGen']:
                         parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
                     if key == 'assemble':
                         parsers[key].add_argument(op['short'],op['long'],help=op['help'])
@@ -214,6 +242,8 @@ class util:
                 parsers[key].set_defaults(func=self.mkgif)
             elif key == 'capture':
                 parsers[key].set_defaults(func=self.capture)
+            elif key == 'docGen':
+                parsers[key].set_defaults(func=self.docGen)
         try:
             options=parser.parse_args()
             options.func(options)

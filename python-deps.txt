@@ -3,3 +3,4 @@ PIL
 pyqrcode
 pyzbar
 cv2
+reportlab
