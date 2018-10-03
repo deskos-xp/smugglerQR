@@ -1,9 +1,13 @@
-['help'],required=op['required'])
-                if skey == 'chunkDir':
-                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
-                if skey == 'qrcode-dir':
-                    if key == 'mkcodes':
-                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
-                    if key == 'assemble':
-                        parsers[key].add_argument(op['short'],op['long'],help=op['help'])
- 
+.returnArgsAsDict(args)
+        if os.path.split(args['fname'])[1] != '.pdf':
+            args['fname']+='.pdf'
+        docName=os.path.join(args['result_dir'],args['fname'])
+        doc=docgen.paged()
+        if not os.path.exists(args['qr_dir']):
+            exit('{} : path does not exist!'.format(args['qr_dir']))
+        doc.tasks(docName,args['qr_dir'])
+        print('document: {}\nfrom: {}'.format(docName,args['qr_dir']))
+
+    def cmdline(self):
+        parser=argparse.ArgumentParser()
+        subParse

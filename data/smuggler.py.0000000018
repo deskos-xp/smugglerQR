@@ -1,7 +1,9 @@
-ers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
-                if skey == 'result-dir':
+)
+                if skey == 'fname':
                     parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
-                if skey == 'logfile':
+                if skey == 'chunkDir':
                     parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
-                if skey == 'uselog-assemble':
-                    parsers[key].add_argument(op['short'],op['long'],help=op['hel
+                if skey == 'qrcode-dir':
+                    if key in ['mkcodes','docGen']:
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+        

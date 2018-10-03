@@ -1,10 +1,13 @@
-s['result_dir'])
-        checked=[i for i in files if os.path.exists(i)] 
-        del(files)
-        gif.mkgif(fnames=checked,fname=os.path.join(args['result_dir'],args['fname']),duration=int(args['duration']))
-        for i in [os.path.join(args['result_dir'],'START.png'),os.path.join(args['result_dir'],'END.png')]:
-            os.remove(i)
+)
+        
         print(args)
 
-    def returnArgsAsDict(self,args):
-        return {i:getattr(args,i) for i in dir(args) if not callable(getattr(args,i)) and not i.startswith('__
+    def mkgif(self,args):
+        gif=mkgif.mkgif()
+        args=self.returnArgsAsDict(args)
+        files=[os.path.join(args['result_dir'],'START.png')]
+        files.extend([os.path.join(args['qr_dir'],i) for i in os.listdir(args['qr_dir']) if os.path.splitext(i)[1] == '.png'])
+        files.append(os.path.join(args['result_dir'],'END.png'))
+        caps=True
+        for i in [os.path.join(args['result_dir'],'START.png'),os.path.join(args['result_dir'],'END.png')]:
+        

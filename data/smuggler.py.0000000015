@@ -1,9 +1,15 @@
-sers.add_parser(name=key)
-            for skey in self.args[key].keys():
-                op=self.args[key][skey] 
-                if skey == 'bytes':
-                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
-                if skey == 'mod':
-                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
-                if skey == 'fname':
-                    parsers[key].add_argument(op['short'],op['long'],help=op
+gsAsDict(args)
+        args['camera']=int(args['camera'])
+        if (args['save_frame'] == True) and (args['qr_dir'] == None):
+            exit('to use -S, you must specify -q')
+        cam=camcorder.camcorder()
+        cam.record(
+                cam=args['camera'],
+                qr_dir=args['qr_dir'],
+                result_dir=args['result_dir'],
+                logfile=args['json_logfile'],
+                saveFrame=args['save_frame'])
+        print(args)
+
+    def docGen(self,args):
+        args=self

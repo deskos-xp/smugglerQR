@@ -26,23 +26,29 @@ class doOne:
                 decoded=decoded
             else:
                 exit('cannot use None value for decoded input when using skipDecode arg of store_to_log()')
-
+        
         deformatter=smuggler_lib.reader()
-        deformatted=deformatter.breakData(decoded)
-        formatted=deformatter.storeData(deformatted,returnChunk=True)
+        if len(decoded) > 1:
+            print("multiple qr codes detected")
+        for i in decoded:
+            detes=[]
+            detes.append(i)
 
-        path=self.mkpath(resultdir,logfile)
+            deformatted=deformatter.breakData(detes)
+            formatted=deformatter.storeData(deformatted,returnChunk=True)
 
-        logData=None
-        if os.path.exists(path):
-            with open(path,'r') as log:
-                logData=json.load(log)
-            logData[formatted[0]]=formatted[1]
-            with open(path,'w') as log:
-                json.dump(logData,log)
-        else:
-            with open(path,'w') as log:
-                json.dump(formatted[1],log)
+            path=self.mkpath(resultdir,logfile)
+            logData=None
+
+            if os.path.exists(path):
+                with open(path,'r') as log:
+                    logData=json.load(log)
+                logData[formatted[0]]=formatted[1]
+                with open(path,'w') as log:
+                    json.dump(logData,log)
+            else:
+                with open(path,'w') as log:
+                    json.dump(formatted[1],log)
 
 if __name__ == "__main__":
     app=doOne()

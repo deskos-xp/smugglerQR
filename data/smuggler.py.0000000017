@@ -1,8 +1,10 @@
-                   if key in ['mkgif']:
-                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
-                    if key == 'capture':
-                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
-                if skey == 'scale':
+rs=parser.add_subparsers()
+        parsers={}
+        for key in self.args.keys():
+            parsers[key]=subParsers.add_parser(name=key)
+            for skey in self.args[key].keys():
+                op=self.args[key][skey] 
+                if skey == 'bytes':
                     parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
-                if skey == 'ofname':
-                    pars
+                if skey == 'mod':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default']

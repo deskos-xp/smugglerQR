@@ -1,7 +1,8 @@
-          'mkgif':{
+  },
+            'mkgif':{
                 'fname':{'short':'-f','long':'--fname','help':'output gif name','required':'yes'},
                 'qrcode-dir':{'short':'-q','long':'--qr-dir','help':'input qrcodes','required':'yes'},
                 'result-dir':{'short':'-r','long':'--result-dir','help':'where the resulting gif will be stored','required':'yes'},
                 'duration':{'short':'-d','long':'--duration','help':'how long between each frame (seconds)','default':'5'},
                 },
-            'ca
+        

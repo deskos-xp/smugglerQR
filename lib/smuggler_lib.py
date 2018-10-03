@@ -13,6 +13,7 @@ class app_qr_handler:
     def createQrCode(self,data,fname=None,scale=6,version=35,error='H',mode=None,encoding=None,tmpdir=None):
         path=None
         qr=pyqrcode.create(data,version=version,error=error,mode=mode,encoding=encoding)
+        #print([i for i in dir(qr) if not i.startswith('__') and callable(getattr(qr,i))])
         if fname == None:
             fname=self.defaultQRName
         if tmpdir == None:
@@ -26,6 +27,8 @@ class app_qr_handler:
             try:
                 path=os.path.join(tmpdir,fname)
                 qr.png(path,scale=scale)
+                #f=getattr(qr,'png')
+                #f(path,scale=scale)
             except:
                 path=os.path.join(os.environ['HOME'],fname)
                 qr.png(path,scale=scale)
@@ -78,7 +81,7 @@ class reader:
             moddy=0
             for i in os.listdir(directory):
                 print(i)
-                moddy=(len(i.split('.')[-1])-len(str(int(i.split('.')[-1]))))-1
+                moddy=(len(i.split('.')[-1])-len(str(int(i.split('.')[-1]))))
                 
             exit('you might need to adjust your mod number to "{}"'.format(moddy))
         return nums,start,end
@@ -142,17 +145,17 @@ class reader:
 
     def storeData(self,chunk,returnChunk=False):
         #data logging
+        dataStore={}
         key='{}_{}'.format(chunk['id'],chunk['pos'])
-        self.dataStore[key]={
+        dataStore[key]={
                 'id':chunk['id'],
                 'pos':chunk['pos'],
                 'end':chunk['end'],
                 'dat':chunk['dat'],
         }
         if returnChunk == True:
-            return key,self.dataStore
-            self.dataStore={}
-
+            return key,dataStore[key]
+        self.dataStore[key]=dataStore[key] 
 
     def ordered_access(self,accept):
         orders=[]

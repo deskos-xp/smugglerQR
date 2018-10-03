@@ -1,4 +1,4 @@
-                 'long':'--json-logfile',
+                    'long':'--json-logfile',
                     'help':'log data to from qrcode',
                     'required':'yes'},
                 'camera':{
@@ -10,4 +10,4 @@
                     'short':'-S',
                     'long':'--save-frame',
                     'help':'save qrcode after decoding to qr_dir',
-            
+         

@@ -1,15 +1,14 @@
-        'action':'store_true'},
+           'action':'store_true'},
                 },
-            }
-    def __init__(self):
-        pass
-
-    def args2dict(self,args):
-        return {i:getattr(args,i) for i in dir(args) if not callable(getattr(args,i)) and not i.startswith('__')}
- 
-    def mkcodes(self,args):
-        args=self.args2dict(args)
-        if type(args['mod']) == type(str()):
-            args['mod']=int(args['mod'])
-        if type(args['scale_of_code']) == type(str()):
-            args['scale_of_code']=int(args['scale_of_code'])
+            'docGen':{
+                'qrcode-dir':{
+                    'short':'-q',
+                    'long':'--qr-dir',
+                    'help':'where qrcodes are for document generation',
+                    'required':'yes'},
+                'result-dir':{
+                    'short':'-r',
+                    'long':'--result-dir',
+                    'help':'where the document will be stored',
+                    'required':'yes'},
+         

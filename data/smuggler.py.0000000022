@@ -1,0 +1,11 @@
+.add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
+            if key == 'mkcodes':
+                parsers[key].set_defaults(func=self.mkcodes)
+            elif key == 'assemble':
+                parsers[key].set_defaults(func=self.assemble)
+            elif key == 'getone':
+                parsers[key].set_defaults(func=self.getone)
+            elif key == 'mkgif':
+                parsers[key].set_defaults(func=self.mkgif)
+            elif key == 'capture':
+                parsers

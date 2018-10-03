@@ -3,5 +3,3 @@ create a util to use claptrap utility to encrypt each chunk separately
 	each qrcode will be paired with a keyfile for its position 
 		or
 	each qrcode will be a chunk of the pre-encrypted data file
-
-create a tool to take a scanned page with qrcodes and cut it into smaller chunks using a red lined grid for scanning

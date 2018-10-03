@@ -1,16 +1,11 @@
-')}
-
-
-    def getone(self,args):
-        decoder=handle_one.doOne()
-        decoder.store_to_log(args.fname,logfile=args.json_logfile,resultdir=args.result_dir)
-        args=self.returnArgsAsDict(args)
-        print(args)
-
-    def assemble(self,args):
-        args=self.args2dict(args)
-        if args['assemble_from_log'] == False and args['qr_dir'] == None:
-            exit('at least one of -l or -q must be specified')
-        f=smuggler_lib.reader()
-        #if type(args['mod']) == type(str()):
-        #  
+    if not os.path.exists(i):
+                caps=False
+        if not caps:
+            cap=mkStartEnd.mkEnds()
+            cap.mkCaps(resultdir=args['result_dir'])
+        checked=[i for i in files if os.path.exists(i)] 
+        del(files)
+        gif.mkgif(fnames=checked,fname=os.path.join(args['result_dir'],args['fname']),duration=int(args['duration']))
+        for i in [os.path.join(args['result_dir'],'START.png'),os.path.join(args['result_dir'],'END.png')]:
+            os.remove(i)
+        print(args

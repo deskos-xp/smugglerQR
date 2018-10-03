@@ -1,8 +1,7 @@
-l','long':'--assemble-from-log','help':'assemble file using log file','action':'store_true'}
+ort':'-l','long':'--assemble-from-log','help':'assemble file using log file','action':'store_true'}
                 },
             'getone':{
                 'fname':{'short':'-f','long':'--fname','help':'qrcode input fname','required':'yes'},
                 'result-dir':{'short':'-r','long':'--result-dir','help':'where resulting log will be appended/created','required':'yes'},
                 'logfile':{'short':'-j','long':'--json-logfile','help':'log data to from qrcode','required':'yes'},
-                },
-  
+              

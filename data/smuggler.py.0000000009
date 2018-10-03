@@ -1,20 +1,12 @@
-         chunkDir=args['chunk_dir'],
-                byteSize=args['bytes']
-                )
+      args['mod']=int(args['mod'])
+        if type(args['scale_of_code']) == type(str()):
+            args['scale_of_code']=int(args['scale_of_code'])
+        if type(args['bytes']) == type(str()):
+            args['bytes']=int(args['bytes'])
 
-        f=smuggler_lib.reader()
-        
-        f.mkcodes(
-                args['fname'],
-                tmpdir=args['qr_dir'],
-                mod=args['mod'],
-                scale=args['scale_of_code'],
-                chunkDir=args['chunk_dir']
-                )
-        
-        print(args)
+        if args['scale_of_code'] < 2:
+            print('scale of code cannot be below 2! setting scale to minimum!')
+            args['scale_of_code']=2
 
-    def mkgif(self,args):
-        gif=mkgif.mkgif()
-        args=self.returnArgsAsDict(args)
-        files=[os.path.jo
+        if args['bytes'] < 256 or args['bytes'] > 512:
+            print('bytes is outside of 256-512 range! sett

@@ -1,16 +1,15 @@
-se -S, you must specify -q')
-        cam=camcorder.camcorder()
-        cam.record(
-                cam=args['camera'],
-                qr_dir=args['qr_dir'],
-                result_dir=args['result_dir'],
-                logfile=args['json_logfile'],
-                saveFrame=args['save_frame'])
+          exit('at least one of -l or -q must be specified')
+        f=smuggler_lib.reader()
+        #if type(args['mod']) == type(str()):
+        #    args['mod']=int(args['mod'])
+        f.readData( 
+                useLog=args['assemble_from_log'],
+                ofname=args['fname'],
+                tmpdir=args['qr_dir'],
+                resultdir=args['result_dir'],
+                resultJson=args['json_logfile']
+            )
         print(args)
 
-    def cmdline(self):
-        parser=argparse.ArgumentParser()
-        subParsers=parser.add_subparsers()
-        parsers={}
-        for key in self.args.keys():
-            parsers[key]=subPar
+    def capture(self,args):
+        args=self.returnAr

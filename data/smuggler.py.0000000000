@@ -4,10 +4,10 @@ import os,sys
 sys.path.insert(0,'./lib')
 import argparse
 import chunkless,smuggler_lib,handle_one,mkStartEnd,mkgif
-import camcorder
+import camcorder,docgen
 class util:
     args={
             'mkcodes':{
                 'bytes':{'short':'-b','long':'--bytes','help':'how big of data chunks to contain in each barcode','default':512},
                 'mod':{'short':'-m','long':'--mod','help':'how many zeros before the actual integer of the last fname','default':8},
-              
+       

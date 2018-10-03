@@ -1,12 +1,8 @@
-parsers[key].set_defaults(func=self.mkcodes)
-            elif key == 'assemble':
-                parsers[key].set_defaults(func=self.assemble)
-            elif key == 'getone':
-                parsers[key].set_defaults(func=self.getone)
-            elif key == 'mkgif':
-                parsers[key].set_defaults(func=self.mkgif)
-            elif key == 'capture':
-                parsers[key].set_defaults(func=self.capture)
-        try:
-            options=parser.parse_args()
-            options.func(options)
+t(op['short'],op['long'],help=op['help'],default=op['default'])
+                if skey == 'ofname':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'result-dir':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                if skey == 'logfile':
+                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+  

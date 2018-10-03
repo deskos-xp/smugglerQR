@@ -1,5 +1,5 @@
-pture':{
-                    'qrcode-dir':{
+    'capture':{
+                'qrcode-dir':{
                     'short':'-q',
                     'long':'--qr-dir',
                     'help':'where qrcodes captured by camera will be stored',
@@ -11,4 +11,3 @@ pture':{
                     'required':'yes'},
                 'logfile':{
                     'short':'-j',
-   

@@ -182,7 +182,8 @@ class util:
 
     def docGen(self,args):
         args=self.returnArgsAsDict(args)
-        if os.path.split(args['fname'])[1] != '.pdf':
+        ext=os.path.splitext(args['fname'])[1]
+        if ext != '.pdf':
             args['fname']+='.pdf'
         docName=os.path.join(args['result_dir'],args['fname'])
         doc=docgen.paged()
@@ -247,7 +248,7 @@ class util:
         try:
             options=parser.parse_args()
             options.func(options)
-        except:
+        except Exception as e:
             exception=sys.exc_info()
             if str(exception[1]) == "'Namespace' object has no attribute 'func'":
                 e='No cmd was given!'
@@ -255,7 +256,6 @@ class util:
                 e=str(exception[1])
             print('\033[1;31;40m{}\033[1;40;m'.format(e))
             options=parser.parse_args('--help'.split())
-
 
 
 

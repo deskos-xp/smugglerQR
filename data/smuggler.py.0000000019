@@ -1,9 +1,8 @@
-p'],action=op['action'])
-                if skey == 'duration':
-                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
-                if skey == 'saveFrame':
-                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],action=op['action'])
-                if skey == 'camera':
-                    parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
-            if key == 'mkcodes':
-                
+            if key == 'assemble':
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'])
+                    if key in ['mkgif']:
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],required=op['required'])
+                    if key == 'capture':
+                        parsers[key].add_argument(op['short'],op['long'],help=op['help'],default=op['default'])
+                if skey == 'scale':
+                    parsers[key].add_argumen
